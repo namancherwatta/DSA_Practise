@@ -61,5 +61,7 @@ function onceNtwice(arr) {
     return xorr?xorr:-1;
 }
 
+
+
 console.log(onceNtwice(arr))    //// O(2N) is complexity
 
