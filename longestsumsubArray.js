@@ -1,33 +1,32 @@
 
-//2 pointer
-function getLongestSubarray(a, k) {
-    let n = a.length; // size of the array
+//2 pointer  -- for positive and zero
+// 
 
-    let left = 0, right = 0; // 2 pointers
-    let sum = a[0];
-    let maxLen = 0;
-    while (right < n) {
-        // if sum > k, reduce the subarray from left
-        // until sum becomes less or equal to k
-        while (left <= right && sum > k) {
-            sum -= a[left];
-            left++;
-        }
 
-        // if sum = k, update the maxLen i.e. answer
-        if (sum === k) {
-            maxLen = Math.max(maxLen, right - left + 1);
-        }
-
-        // Move forward the right pointer
-        right++;
-        if (right < n) sum += a[right];
+//hashmap  ---for Negative and positive
+function getLongestSubarray(a, k){
+ let map= new Map();
+ let sum=0
+ let maxLen = 0
+ for(let i=0;i<a.length;i++){
+     sum+=a[i]
+    if(sum==k){
+        maxLen = Math.max(maxLen, i + 1);
+    }
+    let rem = sum - k;
+    if (map.has(rem)) {
+        let len = i - map.get(rem);
+        maxLen = Math.max(maxLen, len);
     }
 
-    return maxLen;
+    if (!map.has(sum)) {
+        map.set(sum, i);
+    }
+ }
+ return maxLen
 }
 
-let a = [2, 3, 5, 1, 9];
+let a = [0,2, 3,0, 5,0, 1, 9];
 let k = 10;
 let len = getLongestSubarray(a, k);
 console.log("The length of the longest subarray is:", len);
