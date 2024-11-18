@@ -1,29 +1,40 @@
-let arr = [3, 4, 2, 6, 4, 2, 9, 10, 1];
 
-function stock(arr) {
-    let min = 0;          // Index of the minimum value (buy day)
-    let max = 0;          // Index of the maximum value (sell day)
-    let maxProfit = 0;    // Maximum profit
+let arr = [ 4, 3, 6, 4, 9, 10, 1,3,2];
 
-    for (let i = 1; i < arr.length; i++) {
-        // Check for new profit opportunity
-        if (arr[i] - arr[min] > maxProfit) {
-            maxProfit = arr[i] - arr[min];
-            max = i; // Update sell day
+function maxProfitIndices(prices) {
+    if (prices.length < 2) {
+        return "Not enough data to calculate profit.";
+    }
+    
+    let minPrice = prices[0];
+    let minIndex = 0;
+    let maxProfit = 0;
+    let buyIndex = 0;
+    let sellIndex = 0;
+
+    for (let i = 1; i < prices.length; i++) {
+        // Check if we found a new minimum price
+        if (prices[i] < minPrice) {
+            minPrice = prices[i];
+            minIndex = i;
         }
 
-        // Update the buy day if a lower price is found
-        // Only do this if it doesn't disrupt the order (max must be after min)
-        if (arr[i] < arr[min] && i < max) {
-            min = i;
+        // Calculate profit if we sell at current price
+        let profit = prices[i] - minPrice;
+
+        // Update max profit and indices
+        if (profit > maxProfit) {
+            maxProfit = profit;
+            buyIndex = minIndex;
+            sellIndex = i;
         }
     }
 
-    // If no profit is possible (e.g., strictly decreasing array)
-    if (maxProfit <= 0) return [-1, -1];
-
-    // Return the indices of the buy and sell days
-    return [min, max];
+    return {
+        buyIndex,
+        sellIndex,
+        maxProfit
+    };
 }
 
-console.log(stock(arr)); // Output: [2, 7]
+console.log(maxProfitIndices(arr));
