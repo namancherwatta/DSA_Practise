@@ -2,8 +2,11 @@ import express from 'express';
 import dotenv from "dotenv";
 import mongoose from 'mongoose';
 import userRoute from "./routes/user.route.js"
+import gamesRoute from "./routes/game.route.js"
 import bodyParser from 'body-parser';
 import multer from 'multer';
+import cookieParser from 'cookie-parser';
+
 
 
 dotenv.config()
@@ -15,6 +18,7 @@ const upload = multer()
 //middleware
 app.use(express.json());
 app.use(upload.any());
+app.use(cookieParser())
 
 //Connecting to DB
 try {
@@ -27,6 +31,7 @@ try {
 
 //Define routes
 app.use("/api/users",userRoute)
+app.use("/api/games",gamesRoute)
 
 
 
