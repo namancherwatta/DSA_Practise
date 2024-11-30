@@ -11,6 +11,7 @@ const createTokenandSaveCookie=async (userID, res)=>{
     await User.findByIdAndUpdate(userID,{token}
     )
     return token
+    
 }
 
 export default createTokenandSaveCookie;
