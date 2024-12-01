@@ -5,7 +5,8 @@ import validator from "validator";
 const gameSchema=new mongoose.Schema({
         gamename:{
             type:String,
-            required: true
+            required: true,
+            unique: true
         },
         gameURL:{
             type: String,

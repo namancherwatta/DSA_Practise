@@ -77,4 +77,15 @@ res.status(200).json({message:"User logged out successfully"})
 };
 
 
+export const getmyprofile=async(req,res)=>{
+    const user=await req.user
+    res.status(200).json(user)
+}
+
+export const getCreators=async(req,res)=>{
+  const creators=await User.find({role:"Creator"});
+  res.status(200).json(creators)
+}
+
+
 

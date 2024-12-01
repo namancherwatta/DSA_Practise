@@ -29,3 +29,14 @@ export const isAuthenticated=async(req,res, next)=>{
 
 
 //authorise
+export const isCreator =(...roles)=>{
+    return (req,res,next)=>{
+        if(!roles.includes(req.user.role)){
+            return res.status(400).json({error:`User with given role ${req.user.role} not allowed`})
+        }
+        next();
+    }
+}
+
+
+
