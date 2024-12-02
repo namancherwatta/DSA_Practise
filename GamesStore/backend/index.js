@@ -6,7 +6,7 @@ import gamesRoute from "./routes/game.route.js"
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
-
+import cors from "cors";
 
 
 dotenv.config()
@@ -19,6 +19,7 @@ const upload = multer()
 app.use(express.json());
 app.use(upload.any());
 app.use(cookieParser())
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 //Connecting to DB
 try {
