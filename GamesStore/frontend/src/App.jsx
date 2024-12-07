@@ -8,33 +8,37 @@ import Login from "./Pages/login";
 import Register from "./Pages/register";
 import About from "./Pages/about"
 import Dashboard from "./Pages/dashboard"
+import Creators from "./Pages/creators"
 import {Routes, Route, useLocation} from "react-router-dom"
 import { useAuth } from "./context/authprovider"
 
 function App() {
+  console.log(12345)
   const location=useLocation()
   const hideNavbarFooter=["/dashboard","/login","/register"].includes(location.pathname)
 
  const { games, isAuthenticated } = useAuth();
   let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage to maininting the routes protect (Go to login.jsx)
-  console.log(blogs);
-  console.log(isAuthenticated);
+  console.log(games);
 
- console.log(games)
+ 
+
+
   return (
     <div>
       {!hideNavbarFooter && <Navbar />}
       <Routes>
-        <Route exact path="/" element={<Home />}></Route>
+        {/* <Route exact path="/" element={<Home />}></Route> */}
         <Route exact path="/Games" element={<Games />}></Route>
         <Route exact path="/About" element={<About />}></Route>
         <Route exact path="/Contact" element={<Contact />}></Route>
         <Route exact path="/Login" element={<Login />}></Route>
         <Route exact path="/Register" element={<Register />}></Route>
        <Route exact path="/Dashboard" element={<Dashboard />}></Route> 
+       <Route exact path="/Creators" element={<Creators />}></Route>
       </Routes>
 
-     {!hideNavbarFooter && <Footer />}
+     {/* {!hideNavbarFooter && <Footer />} */}
     </div>
   );
 }

@@ -19,7 +19,7 @@ const upload = multer()
 app.use(express.json());
 app.use(upload.any());
 app.use(cookieParser())
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: process.env.FrontendUrl,credentials: true, methods:["GET","POST","PUT","DELETE"] }));
 
 //Connecting to DB
 try {

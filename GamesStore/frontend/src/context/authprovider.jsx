@@ -1,14 +1,14 @@
 import React, { Children, createContext, useContext, useEffect, useState } from 'react'
 import axios from "axios"
 export const Authcontext=createContext()
-export const AuthProvider= ({Children})=> {
+export const AuthProvider= ({children})=> {
     const [games,setGames]=useState()
     useEffect(()=>{
         const fetchGames=async()=>{
             try {
-                const response = await axios.get("http://localhost:4001/api/games/allgames")
-                console.log(response)
-                setGames(response.data)
+                const {data} = await axios.get("http://localhost:4001/api/games/allgames", { withCredentials: true })
+                console.log(data)
+                setGames(data)
             } catch (error) {
                 console.log(error)
             }
@@ -16,7 +16,7 @@ export const AuthProvider= ({Children})=> {
         fetchGames()
     },[])
   return (
-   <Authcontext.Provider value={{games}}>{Children}</Authcontext.Provider>
+   <Authcontext.Provider value={{games}}>{children}</Authcontext.Provider>
   )
 }
 
