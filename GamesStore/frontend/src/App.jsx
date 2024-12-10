@@ -11,6 +11,7 @@ import Dashboard from "./Pages/dashboard"
 import Creators from "./Pages/creators"
 import {Routes, Route, useLocation} from "react-router-dom"
 import { useAuth } from "./context/authprovider"
+import { Toaster } from "react-hot-toast";
 
 function App() {
   console.log(12345)
@@ -37,7 +38,7 @@ function App() {
        <Route exact path="/Dashboard" element={<Dashboard />}></Route> 
        <Route exact path="/Creators" element={<Creators />}></Route>
       </Routes>
-
+      <Toaster />
      {/* {!hideNavbarFooter && <Footer />} */}
     </div>
   );

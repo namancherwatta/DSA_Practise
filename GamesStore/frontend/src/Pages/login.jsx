@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authprovider";
+
 
 function Login() {
-  const { isAuthenticated, setIsAuthenticated, setProfile } = useAuth();
+
 
   const navigateTo = useNavigate();
   const [email, setEmail] = useState("");
@@ -32,8 +32,7 @@ function Login() {
       toast.success(data.message || "User Logined successfully", {
         duration: 3000,
       });
-      setProfile(data);
-      setIsAuthenticated(true);
+    
       setEmail("");
       setPassword("");
       setRole("");
@@ -55,7 +54,7 @@ function Login() {
         <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
           <form onSubmit={handleLogin}>
             <div className="font-semibold text-xl items-center text-center">
-              Cilli<span className="text-blue-500">Blog</span>
+              Gamers<span className="text-blue-500">Spot</span>
             </div>
             <h1 className="text-xl font-semibold mb-6">Login</h1>
             <select
@@ -64,8 +63,8 @@ function Login() {
               className="w-full p-2 mb-4 border rounded-md"
             >
               <option value="">Select Role</option>
-              <option value="user">user</option>
-              <option value="admin">admin</option>
+              <option value="Gamer">Gamer</option>
+              <option value="Creator">Creator</option>
             </select>
 
             <div className="mb-4">
@@ -87,6 +86,8 @@ function Login() {
                 className="w-full p-2  border rounded-md"
               />
             </div>
+
+
 
             <p className="text-center mb-4">
               New User?{" "}
