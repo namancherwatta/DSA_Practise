@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useAuth } from "../context/authprovider";
 
 function Login() {
-
+ 
+    const {isAuthenticated,setIsAuthenticated}=useAuth()
+    
 
   const navigateTo = useNavigate();
   const [email, setEmail] = useState("");
@@ -29,6 +31,7 @@ function Login() {
       console.log(data);
       // Store the token in localStorage
       localStorage.setItem("jwt", data.token); // storing token in localStorage so that if user refreshed the page it will not redirect again in login
+      setIsAuthenticated(true)
       toast.success(data.message || "User Logined successfully", {
         duration: 3000,
       });

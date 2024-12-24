@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useAuth } from '../context/authprovider'
 export default function register() {
+    const {isAuthenticated,setIsAuthenticated}=useAuth()
+    const navigateTo=useNavigate()
+
     const [name,setName]=useState("")
     const [email,setEmail]=useState("")
     const [phone,setPhone]=useState("")
@@ -23,11 +27,13 @@ export default function register() {
       })
       console.log(data) 
       toast.success(data.message || 'User registered successfully')
+      setIsAuthenticated(true)
       setName("")
       setEmail("")
       setPhone("")
       setPassword("")
       setRole("")
+      navigateTo("/");
     } catch (error) {
       console.log(error)
       toast.error(error.message || "Please fill required fields")
@@ -55,7 +61,7 @@ export default function register() {
           <input type='number' placeholder='Contact number' value={phone} onChange={(e)=>{setPhone(e.target.value)}} className='w-full p-2  mb-4 border rounded-md '/>        
           <input type='password' placeholder='Enter Password' value={password} onChange={(e)=>{setPassword(e.target.value)}} className='w-full p-2  mb-4  border rounded-md '/>        
           </div>
-          <p className='text-center mb-4'>Already Registered?{"  "}<Link className="text-blue-600">Login now</Link></p>
+          <p className='text-center mb-4'>Already Registered?{"  "}<Link to={"/login"} className="text-blue-600">Login now</Link></p>
           <button type='submit' className='w-full p-2 bg-blue-500 hover:bg-blue-800 duration-300 rounded-md text-white' >Register</button>
         </form>
       </div>

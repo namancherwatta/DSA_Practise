@@ -14,7 +14,7 @@ import { useAuth } from "./context/authprovider"
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  console.log(12345)
+  
   const location=useLocation()
   const hideNavbarFooter=["/dashboard","/login","/register"].includes(location.pathname)
 
@@ -29,7 +29,7 @@ function App() {
     <div>
       {!hideNavbarFooter && <Navbar />}
       <Routes>
-        {/* <Route exact path="/" element={<Home />}></Route> */}
+        <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/Games" element={<Games />}></Route>
         <Route exact path="/About" element={<About />}></Route>
         <Route exact path="/Contact" element={<Contact />}></Route>
@@ -39,7 +39,7 @@ function App() {
        <Route exact path="/Creators" element={<Creators />}></Route>
       </Routes>
       <Toaster />
-     {/* {!hideNavbarFooter && <Footer />} */}
+     {!hideNavbarFooter && <Footer />}
     </div>
   );
 }

@@ -3,23 +3,22 @@ import dotenv from "dotenv";
 import mongoose from 'mongoose';
 import userRoute from "./routes/user.route.js"
 import gamesRoute from "./routes/game.route.js"
-import bodyParser from 'body-parser';
-import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import cors from "cors";
+import fileUpload from 'express-fileupload';
+import { v2 as cloudinary } from "cloudinary"
 
 
 dotenv.config()
 const port = process.env.port
 const app = express()
 const mongourl=process.env.mongoURI
-const upload = multer()
- 
+
 //middleware
 app.use(express.json());
-app.use(upload.any());
 app.use(cookieParser())
 app.use(cors({ origin: process.env.FrontendUrl,credentials: true, methods:["GET","POST","PUT","DELETE"] }));
+app.use(fileUpload({useTempFiles: true,tempFileDir: "/tmp/",}));
 
 //Connecting to DB
 try {
@@ -29,6 +28,12 @@ try {
     console.log(error)
 }
 
+//cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_SECRET_KEY,
+});
 
 //Define routes
 app.use("/api/users",userRoute)

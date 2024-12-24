@@ -8,7 +8,7 @@ const router=express.Router()
 
 router.post('/addGame',isAuthenticated,isCreator("Creator"),AddGame)
 router.delete('/delGame/:id',isAuthenticated,isCreator("Creator"),DelGame)
-router.get('/allgames',isAuthenticated,GetAllGames)
+router.get('/allgames',GetAllGames)
 router.get('/singleGame/:id',isAuthenticated,GetSingleGame)
 router.get('/myGames',isAuthenticated,isCreator("Creator"),GetMyGames)
 router.put('/updGame/:id',isAuthenticated,isCreator("Creator"),UpdateGame)

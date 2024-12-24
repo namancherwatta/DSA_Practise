@@ -8,6 +8,15 @@ const gameSchema=new mongoose.Schema({
             required: true,
             unique: true
         },
+        gameImage:{
+            public_id: {
+                type: String,
+                required: true,
+            },  url: {
+                type: String,
+                required: true,
+              },
+        },
         gameURL:{
             type: String,
             required: true,
